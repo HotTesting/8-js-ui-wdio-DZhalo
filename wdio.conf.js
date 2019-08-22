@@ -7,9 +7,8 @@ exports.config = {
     // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
     // on a remote machine).
     runner: 'local',
-    // Where selenium standalone or chrome driver started
-    // hostname: 'localhost',
-    // port: 4444,
+    //
+    // Override default path ('/wd/hub') for chromedriver service.
     path: '/',
     //
     // ==================
@@ -125,7 +124,7 @@ exports.config = {
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
     reporters: ['spec'],
-    
+ 
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -195,13 +194,14 @@ exports.config = {
      * afterEach in Mocha)
      */
     // afterHook: function () {
-    // },
+    // }, 
     /**
      * Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
      * @param {Object} test test details
      */
-    // afterTest: function (test) {
+    // afterTest: function(test) {
     // },
+
     /**
      * Hook that gets executed after the suite has ended
      * @param {Object} suite suite details
