@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "wdio wdio.conf.js"
+    "test": "wdio wdio.conf.js",
+    "singleTest": "wdio wdio.conf.js --suite single"
   },
   "repository": {
     "type": "git",
