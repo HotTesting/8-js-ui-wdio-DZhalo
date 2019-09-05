@@ -11,12 +11,27 @@ describe("Search results sorting", function() {
       sortByPriceLink.click()
       browser.pause(3000)
 
-      const searchResultPrices = searchResultsPage.$$('.product')
+      const searchResults = searchResultsPage.$$('.product.column')
+      
+      const itemPrices = searchResults.map(function (item){
+            return item.getAttribute('data-price')          
+        })
 
-
+      let prevValue = null;
+ 
+      for(let i =0; i < itemPrices.length; i++){
+          if(prevValue !== null){
+              assert(prevValue <= itemPrices[i] ,'Price sorting is wrong');
+              prevValue = itemPrices[i];
+            } else{
+              prevValue = itemPrices[i];
+            }  
+        }
       
     });
   
+
+
     it("correctly arranges items when using 'by name' sorting", function() {
         browser.url('')
         const searchInput = $('input[type="search"]')
