@@ -21,7 +21,8 @@ exports.config = {
     //
     specs: [
         //'./test/specs/**/*.js'
-        './test/specs/contact_us_test.js'
+        //'./test/specs/contact_us_test.js'
+        './test/specs/sorting_test.js'
     ],
     suites: {
         single: [
