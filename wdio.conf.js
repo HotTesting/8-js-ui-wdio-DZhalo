@@ -1,3 +1,6 @@
+require('ts-node').register({ files: true });
+
+
 exports.config = {
     //
     // ====================
@@ -22,7 +25,8 @@ exports.config = {
     specs: [
         //'./test/specs/**/*.js'
         //'./test/specs/contact_us_test.js'
-        './test/specs/sorting_test.js'
+        //'./test/specs/sorting_test.js'
+        './test/specs/order.ts'
     ],
     suites: {
         single: [
