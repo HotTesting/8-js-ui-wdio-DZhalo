@@ -1,5 +1,6 @@
 import { App } from '../../pageObjects/application';
 import { expect } from 'chai'
+import { CustomerInfo } from '../../dataModels/CustomerInfo';
 
 /**
  - verify prices in cart, and after order created
@@ -30,7 +31,18 @@ describe("Order", function() {
 
         expect(productPriceInCart).to.equal(productDetails.price)
 
-        App.checkout.customerDetails.fillInForm();
+        const customerInfo = new CustomerInfo({
+            firstName : 'Daria',
+            lastName : 'Test',
+            address1 : 'Street 1',
+            postCode : '32123',
+            city : 'Kiev',
+            country : 'Ukraine',
+            email : `test${new Date().getTime() / 1000}@test.com`,
+            phone : '+380501112233'
+        })
+
+        App.checkout.customerDetails.fillInForm(customerInfo)
         
         App.checkout.customerDetails.saveCustomerDetails()
         App.checkout.confirmOrder()
@@ -56,9 +68,21 @@ describe("Order", function() {
 
         expect(orderSum).to.equal(productDetails.price)
 
-        App.checkout.customerDetails.fillInForm();
+        // const customerInfo = new CustomerInfo({
+        //     firstName : 'Daria',
+        //     lastName : 'Test',
+        //     address1 : 'Street 1',
+        //     postCode : '32123',
+        //     city : 'Kiev',
+        //     country : 'Ukraine',
+        //     email : `test${new Date().getTime() / 1000}@test.com`,
+        //     phone : '+380501112233'
+        // })
+
+        // App.checkout.customerDetails.fillInForm(customerInfo)
         
-        App.checkout.customerDetails.saveCustomerDetails()
+        // App.checkout.customerDetails.saveCustomerDetails()
+      
         App.checkout.confirmOrder()
 
         const orderResultProduct = $('#box-order-success .item').getAttribute('data-name')
@@ -81,9 +105,20 @@ describe("Order", function() {
 
         expect(orderSum).to.equal(productDetails.price)
 
-        App.checkout.customerDetails.fillInForm();
+        // const customerInfo = new CustomerInfo({
+        //     firstName : 'Daria',
+        //     lastName : 'Test',
+        //     address1 : 'Street 1',
+        //     postCode : '32123',
+        //     city : 'Kiev',
+        //     country : 'Ukraine',
+        //     email : `test${new Date().getTime() / 1000}@test.com`,
+        //     phone : '+380501112233'
+        // })
+
+        // App.checkout.customerDetails.fillInForm(customerInfo)
         
-        App.checkout.customerDetails.saveCustomerDetails()
+        // App.checkout.customerDetails.saveCustomerDetails()
         App.checkout.confirmOrder()
 
         const orderResultProduct = $('#box-order-success .item').getAttribute('data-name')
@@ -110,16 +145,27 @@ describe("Order", function() {
 
         expect(orderSum).to.equal(productPriceInCart*productQuantityInCart)
 
-        App.checkout.customerDetails.fillInForm();
+        // const customerInfo = new CustomerInfo({
+        //     firstName : 'Daria',
+        //     lastName : 'Test',
+        //     address1 : 'Street 1',
+        //     postCode : '32123',
+        //     city : 'Kiev',
+        //     country : 'Ukraine',
+        //     email : `test${new Date().getTime() / 1000}@test.com`,
+        //     phone : '+380501112233'
+        // })
+
+        // App.checkout.customerDetails.fillInForm(customerInfo)
         
-        App.checkout.customerDetails.saveCustomerDetails()
+        // App.checkout.customerDetails.saveCustomerDetails()
         App.checkout.confirmOrder()
 
         const orderResultQuantity = parseFloat($('#box-order-success .item').getAttribute('data-quantity'))
         expect(orderResultQuantity).to.equal(productQuantityInCart)
     });
 
-    it.only("is successful for 2 different items in card", function() {
+    it("is successful for 2 different items in card", function() {
         App.product.open('/rubber-ducks-c-1/red-duck-p-3') 
         App.product.addToCart()
 
@@ -136,10 +182,21 @@ describe("Order", function() {
         const orderSum = App.checkout.getSum()
 
         expect(orderSum).to.equal(productPriceInCart1+productPriceInCart2)
+        
+        // const customerInfo = new CustomerInfo({
+        //     firstName : 'Daria',
+        //     lastName : 'Test',
+        //     address1 : 'Street 1',
+        //     postCode : '32123',
+        //     city : 'Kiev',
+        //     country : 'Ukraine',
+        //     email : `test${new Date().getTime() / 1000}@test.com`,
+        //     phone : '+380501112233'
+        // })
 
-        App.checkout.customerDetails.fillInForm();
+        // App.checkout.customerDetails.fillInForm(customerInfo)
 
-        App.checkout.customerDetails.saveCustomerDetails()
+        // App.checkout.customerDetails.saveCustomerDetails()
         App.checkout.confirmOrder()
 
         const orderResultProduct = $('#box-order-success .items').getText()
@@ -168,9 +225,20 @@ describe("Order", function() {
         expect(orderSum).to.equal(productDetails.price)
         expect(productSizeInCart).to.include('Small')
  
-        App.checkout.customerDetails.fillInForm();
+        // const customerInfo = new CustomerInfo({
+        //     firstName : 'Daria',
+        //     lastName : 'Test',
+        //     address1 : 'Street 1',
+        //     postCode : '32123',
+        //     city : 'Kiev',
+        //     country : 'Ukraine',
+        //     email : `test${new Date().getTime() / 1000}@test.com`,
+        //     phone : '+380501112233'
+        // })
+
+        // App.checkout.customerDetails.fillInForm(customerInfo)
          
-        App.checkout.customerDetails.saveCustomerDetails()
+        // App.checkout.customerDetails.saveCustomerDetails()
         App.checkout.confirmOrder()
  
         const orderResultProduct = $('#box-order-success .item').getAttribute('data-name')

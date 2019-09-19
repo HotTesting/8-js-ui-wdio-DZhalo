@@ -1,17 +1,23 @@
 
 import { ProductDetailsModel } from '../dataModels/ProductDetails';
+import { Header } from './components/header';
 // for example: http://ip-5236.sunline.net.ua:38015/rubber-ducks-c-1/blue-duck-p-4
 
 
 export class ProductDetails {
+    header = new Header()
 
     open(productPath) {
         browser.url(productPath)
     }
 
     addToCart() {
+        const currentItemsInCart = this.header.getQuantity()
         $('button[name="add_cart_product"]').click()
-        browser.pause(2000)
+        browser.waitUntil(() => {
+            return this.header.getQuantity() > currentItemsInCart
+        }, null, `Expected items in cart to be changed. 
+        Current items: ${this.header.getQuantity()} items before ${currentItemsInCart}`)
     }
 
     public getProductPrice() {

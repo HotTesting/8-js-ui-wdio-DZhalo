@@ -1,3 +1,5 @@
+import { CustomerInfo } from "../dataModels/CustomerInfo";
+
 export class Checkout {
     shoppingCart
     customerDetails
@@ -13,7 +15,7 @@ export class Checkout {
 
     open() {
         browser.url('/checkout')
-        browser.pause(3000)
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to disappear`)
     }
 
     isNoItemsInCart() {
@@ -36,8 +38,9 @@ export class Checkout {
     }
 
     confirmOrder() {
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to dispappear`);
         $('.confirm button[name="confirm_order"]').click()
-        browser.pause(2000)
+        
     }
 }
 
@@ -116,52 +119,75 @@ class CustomerDetails {
 
 
     public setFirstName(name) {
+        this.firstNameInput.click()
+        this.firstNameInput.clearValue()
         this.firstNameInput.setValue(name)
     }
 
     public setLastName(lastname) {
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to dispappear`);
+        this.lastNameInput.click()
+        this.lastNameInput.clearValue()
         this.lastNameInput.setValue(lastname)
     }
 
-    public setAddress(address) {
-        this.addressInput.setValue(address)
+    public setAddress1(address1) {
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to dispappear`);
+        this.addressInput.click()
+        this.addressInput.clearValue()
+        this.addressInput.setValue(address1)
     }
 
     public setPostcode(code) {
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to dispappear`);
+        this.postcodeInput.click()
+        this.postcodeInput.clearValue()
         this.postcodeInput.setValue(code)
     }
 
     public setCity(city) {
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to dispappear`);
+        this.cityInput.click()
+        this.cityInput.clearValue()
         this.cityInput.setValue(city)
     }
 
     public setCountry(country) {
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to dispappear`);
         this.countrySelect.selectByVisibleText(country)
     }
 
     public setEmail(email) {
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to dispappear`);
         this.emailInput.click()
+        this.emailInput.clearValue()
         this.emailInput.setValue(email)
     }
 
     public setPhone(phone) {
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to dispappear`);
+        this.phoneInput.click()
+        this.phoneInput.clearValue()
         this.phoneInput.setValue(phone)
     }
 
     public saveCustomerDetails() {
-        $('.customer button[name="save_customer_details"]').click()
-        browser.pause(3000)
+        $('.loader-wrapper .loader').waitForDisplayed(null, true, `Expected loader to dispappear`);
+        const saveButton = $('.customer button[name="save_customer_details"]')
+        saveButton.waitForEnabled(null, null, 'Expected Save button to be active')
+        saveButton.click()
     }
 
 
-    public fillInForm() {
-        this.setFirstName('Daria')
-        this.setLastName('Test')
-        this.setAddress('Street 1')
-        this.setPostcode('32123')
-        this.setCity('Kiev')
-        this.setCountry('Ukraine')
-        this.setEmail(`test${new Date().getTime() / 1000}@test.com`)
-        this.setPhone('+380501112233')
+    public fillInForm(customerInfo: CustomerInfo) {
+        this.setFirstName(customerInfo.firstName)
+        this.setLastName(customerInfo.lastName)
+        this.setAddress1(customerInfo.address1)
+        this.setPostcode(customerInfo.postCode)
+        this.setCity(customerInfo.city)
+        this.setCountry(customerInfo.country)
+        this.setEmail(customerInfo.email)
+        this.setPhone(customerInfo.phone)
     }
+
 }
